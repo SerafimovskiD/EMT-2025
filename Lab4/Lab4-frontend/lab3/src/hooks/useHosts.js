@@ -5,7 +5,6 @@ const initialState = {
     "hosts": [],
     "loading": true,
 };
-
 const useHosts = () =>{
     const [state, setState] = useState(initialState);
     const fetchHosts = useCallback(() => {

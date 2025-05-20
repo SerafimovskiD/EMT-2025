@@ -9,7 +9,6 @@ const useHostDetails = (id) => {
 
     useEffect(() => {
         if (!id) return;
-
         hostRepository
             .findById(id)
             .then((response) => {

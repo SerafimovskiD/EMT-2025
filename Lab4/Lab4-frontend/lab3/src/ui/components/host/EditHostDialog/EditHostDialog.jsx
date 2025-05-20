@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Button,
     Dialog,
@@ -9,31 +9,28 @@ import {
     InputLabel, MenuItem, Select,
     TextField
 } from "@mui/material";
-import useCountry  from "../../../../hooks/useCountry.js";
-
-
-const EditAuthorDialog = ({open, onClose, host, onEdit}) => {
+import useCountries from "../../../../hooks/useCountries.js";
+const EditHostDialog = ({open, onClose, host, onEdit}) => {
+    const countries = useCountries();
     const [formData, setFormData] = useState({
         "name": host.name,
         "surname": host.surname,
-        "countryId": host.countryId,
+        "country": host.country,
     });
     useEffect(() => {
         if (host) {
             setFormData({
                 name: host.name || "",
                 surname: host.surname || "",
-                countryId: host.countryId || "",
+                country: host.country || "",
             });
         }
     }, [host]);
-    const { countries, loading } = useCountry();
-
     const handleChange = (event) => {
         const {name, value} = event.target;
         setFormData({
             ...formData,
-            [name]: name === "countryId" ? Number(value) : value
+            [name]: name === "country" ? Number(value) : value
         });
     };
 
@@ -66,21 +63,17 @@ const EditAuthorDialog = ({open, onClose, host, onEdit}) => {
                 <FormControl fullWidth margin="dense">
                     <InputLabel>Country</InputLabel>
                     <Select
-                        name="countryId"
-                        value={formData.countryId}
+                        name="country"
+                        value={formData.country}
                         onChange={handleChange}
                         label="Country"
                         variant="outlined"
                     >
-                        {loading ? (
-                            <MenuItem disabled>Loading...</MenuItem>
-                        ) : (
-                            countries.map((country) => (
-                                <MenuItem key={country.id} value={country.id}>
-                                    {country.name}
-                                </MenuItem>
-                            ))
-                        )}
+                        {countries.map((country) => (
+                        <MenuItem key={country.id} value={country.id}>
+                            {country.name}
+                        </MenuItem>))}
+
                     </Select>
                 </FormControl>
             </DialogContent>
@@ -92,4 +85,4 @@ const EditAuthorDialog = ({open, onClose, host, onEdit}) => {
     );
 };
 
-export default EditAuthorDialog;
+export default EditHostDialog;

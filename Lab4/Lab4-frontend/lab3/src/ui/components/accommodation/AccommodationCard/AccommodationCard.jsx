@@ -28,7 +28,7 @@ const AccommodationCard = ({ accommodation, onEdit, onDelete }) => {
                         Category: {accommodation.category}
                     </Typography>
                     <Typography variant="subtitle2">
-                        Host: {accommodation.host?.name} {accommodation.host?.surname}
+                        Host: {accommodation.host}
                     </Typography>
                     <Typography variant="subtitle2">
                         Rooms: {accommodation.numRooms}

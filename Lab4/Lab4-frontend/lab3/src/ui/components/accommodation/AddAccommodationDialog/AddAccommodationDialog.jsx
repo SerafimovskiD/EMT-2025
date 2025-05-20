@@ -11,16 +11,18 @@
         Select,
         MenuItem
     } from "@mui/material";
+    import useCategory from "../../../../hooks/useCategory.js";
 
-    const categories = [
-        "ROOM",
-        "HOUSE",
-        "FLAT",
-        "APARTMENT",
-        "HOTEL",
-    ];
+    // const categories = [
+    //     "ROOM",
+    //     "HOUSE",
+    //     "FLAT",
+    //     "APARTMENT",
+    //     "HOTEL",
+    // ];
 
     const AddAccommodationDialog = ({ open, onClose, onAdd, hosts=[] }) => {
+        const categories=useCategory();
         const initialFormData = {
             name: "",
             category: "",

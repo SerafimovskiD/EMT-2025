@@ -11,17 +11,20 @@ import {
     Select,
     MenuItem
 } from "@mui/material";
-import useHosts from "../../../../hooks/useHosts.js";
+import useHosts from "../../../../hooks/useHost.js";
+import useCategory from "../../../../hooks/useCategory.js";
 
-const categories = [
-    "ROOM",
-    "HOUSE",
-    "FLAT",
-    "APARTMENT",
-    "HOTEL"
-];
+// const categories = [
+//     "ROOM",
+//     "HOUSE",
+//     "FLAT",
+//     "APARTMENT",
+//     "HOTEL"
+// ];
 
 const EditAccommodationDialog = ({ open, onClose, onEdit, accommodation }) => {
+    const categories=useCategory();
+
     const [formData, setFormData] = useState({
         name: "",
         category: "",
@@ -29,14 +32,14 @@ const EditAccommodationDialog = ({ open, onClose, onEdit, accommodation }) => {
         numRooms: ""
     });
 
-    const { hosts=[] } = useHosts();
-
+    // const { hosts=[] } = useHosts();
+    const hosts=useHosts();
     useEffect(() => {
         if (accommodation) {
             setFormData({
                 name: accommodation.name || "",
                 category: accommodation.category || "",
-                host: accommodation.host?.id || "",  // we store just the host id
+                host: accommodation.host || "",  // we store just the host id
                 numRooms: accommodation.numRooms || ""
             });
         }
